@@ -1,22 +1,22 @@
 #include"main.h"
-/*ÍÆ¼öÏµÍ³µ¼ÂÛµÚÒ»´Î×÷Òµ
-  Ê¹ÓÃĞ­Í¬¹ıÂË·½·¨ÍÆ¼öÆÀ·ÖÎÊÌâ
+/*æ¨èç³»ç»Ÿå¯¼è®ºç¬¬ä¸€æ¬¡ä½œä¸š
+  ä½¿ç”¨ååŒè¿‡æ»¤æ–¹æ³•æ¨èè¯„åˆ†é—®é¢˜
   Lyy 2018-03-06
   */
-
-// Ê¹ÓÃĞ­Í¬¹ıÂËÒ»°ã·½·¨
-// Ê¹ÓÃ¶¯Ì¬Á´±í
+//IDEï¼šVS2010
+// ä½¿ç”¨ååŒè¿‡æ»¤ä¸€èˆ¬æ–¹æ³•
+// ä½¿ç”¨åŠ¨æ€é“¾è¡¨
 
 int main(){
 	//begianing
-	buff Buff[20];	//	´æ´¢20¸ö×îÏà¹ØµÄÓÃ»§½Úµã
-	FILE * fp;		//	ÎÄ¼şÖ¸Õë
-	users main_user;//ÒªÔ¤²âµÄÓÃ»§ÆÀ·ÖĞĞÎª
-	users TempUser;	//¶ÔÃ¿¸öÓÃ»§½øĞĞÏà¹ØĞÔ¼ÆËãµÄ»º´æ±äÁ¿
+	buff Buff[20];	//	å­˜å‚¨20ä¸ªæœ€ç›¸å…³çš„ç”¨æˆ·èŠ‚ç‚¹
+	FILE * fp;		//	æ–‡ä»¶æŒ‡é’ˆ
+	users main_user;//è¦é¢„æµ‹çš„ç”¨æˆ·è¯„åˆ†è¡Œä¸º
+	users TempUser;	//å¯¹æ¯ä¸ªç”¨æˆ·è¿›è¡Œç›¸å…³æ€§è®¡ç®—çš„ç¼“å­˜å˜é‡
 	int i;
-	users last_user;movies temp;//Õë¶ÔÎÄ¼ş¶¨Î»À§ÄÑÎÊÌâÉèÖÃÃ¿¸öÓÃ»§µÄÒ»¸öÔªËØ
+	users last_user;movies temp;//é’ˆå¯¹æ–‡ä»¶å®šä½å›°éš¾é—®é¢˜è®¾ç½®æ¯ä¸ªç”¨æˆ·çš„ä¸€ä¸ªå…ƒç´ 
 	float x=0;
-	//*************³õÊ¼»¯***************************
+	//*************åˆå§‹åŒ–***************************
 	last_user.UserId=0;
 	last_user.M=&temp;
 	last_user.M->next=NULL;
@@ -30,19 +30,19 @@ int main(){
 		Buff[i].user.M=NULL;
 	}
 	main_user.M=NULL;
-	main_user.UserId=405;//±ØĞë·Ç 1
-	findsource(fp,main_user.UserId,&last_user);//Ö¸Õë¶¨Î»
-	ReadData(fp,&main_user,&last_user);//¶ÁÈ¡Êı¾İ
-	//fseek(fp,0,0);//Ö¸Õë¹éÎ»
+	main_user.UserId=405;//å¿…é¡»é 1
+	findsource(fp,main_user.UserId,&last_user);//æŒ‡é’ˆå®šä½
+	ReadData(fp,&main_user,&last_user);//è¯»å–æ•°æ®
+	//fseek(fp,0,0);//æŒ‡é’ˆå½’ä½
 	fclose(fp);
 	fp = fopen("u1.base","r");
 	//**********************************************
-	//**************¼ÆËãÏà¹Ø¶È**********************
+	//**************è®¡ç®—ç›¸å…³åº¦**********************
 	last_user.UserId=1;
-	printf("¼ÆËãÏà¹Ø¶È:\n");
+	printf("è®¡ç®—ç›¸å…³åº¦:\n");
 	for(i=0;!feof(fp);)
 	{
-		i++;	//·ÅÕâÀï·ÀÖ¹continue;Ê¹i²»ÔÚ¼ÓÒ»
+		i++;	//æ”¾è¿™é‡Œé˜²æ­¢continue;ä½¿iä¸åœ¨åŠ ä¸€
 		TempUser.UserId=i;
 		TempUser.M=NULL;
 		ReadData(fp,&TempUser,&last_user);
@@ -54,19 +54,19 @@ int main(){
 		save_max(x,Buff,TempUser);
 		show_rate(943,TempUser.UserId);
 		//show_related(Buff);
-		//´æ´¢
+		//å­˜å‚¨
 	}
 	putchar('\n');
 	show_related(Buff);
 	fclose(fp);
 
-	//ÍÆ¼ö¼ÆËã
+	//æ¨èè®¡ç®—
 	//2018-03-08
 	x=compute_recommend(main_user,Buff,288);
 	if(x==-1)
-		printf("\n×îÏà¹ØµÄÃ»ÓĞ288ÕâÒ»Ïî");
+		printf("\næœ€ç›¸å…³çš„æ²¡æœ‰288è¿™ä¸€é¡¹");
 	else
-		printf("\nÔ¤²â½á¹ûÊÇ405 ÓÃ»§¶Ô 288 ÆÀ·ÖÎª£º %f",x);
+		printf("\né¢„æµ‹ç»“æœæ˜¯405 ç”¨æˆ·å¯¹ 288 è¯„åˆ†ä¸ºï¼š %f",x);
 	for(i=0;i<20;i++)
 	{
 		destroy(Buff[i].user.M);
